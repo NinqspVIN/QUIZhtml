@@ -12,29 +12,29 @@ body{min-height:100vh;display:flex;align-items:center;justify-content:center;bac
 h1{text-align:center;color:#333;margin-bottom:10px;font-size:1.8em}
 .subtitle{text-align:center;color:#777;margin-bottom:25px;font-size:.95em}
 .progress{height:8px;background:#eee;border-radius:4px;overflow:hidden;margin-bottom:25px}
-.progress-bar{height:100%;background:linear-gradient(90deg,#667eea,#764ba2);transition:width .4s ease;width:0}
-.question-num{color:#764ba2;font-weight:600;margin-bottom:10px;font-size:.9em}
-.question{font-size:1.2em;color:#333;margin-bottom:25px;line-height:1.5;font-weight:500}
+.progress-bar{height:100%;background:linear-gradient(90deg,#667eea,#764ba2);transition:width .4s ease}
+.question-num{color:#764ba2;font-weight:600;margin-bottom:10px;font-size:.95em}
+.question{font-size:1.2em;color:#222;margin-bottom:25px;line-height:1.5;font-weight:500}
 .options{display:flex;flex-direction:column;gap:12px}
-.option{background:#f7f8fc;border:2px solid #e0e3eb;border-radius:12px;padding:15px 20px;cursor:pointer;transition:all .2s ease;font-size:1em;color:#000;text-align:left;display:flex;align-items:center;gap:12px}
+.option{background:#f7f8fc;border:2px solid #d0d4e0;border-radius:12px;padding:15px 20px;cursor:pointer;transition:all .2s ease;display:flex;align-items:center;gap:12px}
 .option:hover{background:#eef0fa;border-color:#667eea;transform:translateX(5px)}
-.option .letter{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:#fff;border:2px solid #c5c9d6;border-radius:50%;font-weight:700;color:#667eea;flex-shrink:0}
-.option .answer-text{color:#000;font-size:1em;line-height:1.4}
-.option.correct{background:#d4edda;border-color:#28a745;color:#155724}
+.option .letter{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;background:#fff;border:2px solid #667eea;border-radius:50%;font-weight:700;color:#667eea;flex-shrink:0;font-size:.95em}
+.option .answer-text{color:#222;font-size:1em;line-height:1.4;font-weight:500}
+.option.correct{background:#d4edda;border-color:#28a745}
 .option.correct .letter{background:#28a745;color:#fff;border-color:#28a745}
 .option.correct .answer-text{color:#155724}
-.option.wrong{background:#f8d7da;border-color:#dc3545;color:#721c24}
+.option.wrong{background:#f8d7da;border-color:#dc3545}
 .option.wrong .letter{background:#dc3545;color:#fff;border-color:#dc3545}
 .option.wrong .answer-text{color:#721c24}
-.option.disabled{pointer-events:none;opacity:.7}
+.option.locked{pointer-events:none}
 .result{text-align:center}
 .score{font-size:4em;font-weight:700;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:20px 0}
 .grade{font-size:1.5em;color:#333;margin-bottom:10px}
-.grade-label{color:#777;margin-bottom:25px}
+.grade-label{color:#555;margin-bottom:25px;font-size:1.05em}
 .btn{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:14px 35px;font-size:1em;border-radius:30px;cursor:pointer;font-weight:600;transition:all .2s ease;box-shadow:0 5px 15px rgba(102,126,234,.4)}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(102,126,234,.5)}
 .start{text-align:center}
-.start p{color:#555;margin-bottom:25px;line-height:1.6}
+.start p{color:#555;margin-bottom:25px;line-height:1.7;font-size:1.02em}
 @media(max-width:500px){.container{padding:25px}h1{font-size:1.4em}.question{font-size:1.05em}.score{font-size:3em}}
 </style>
 </head>
@@ -43,19 +43,19 @@ h1{text-align:center;color:#333;margin-bottom:10px;font-size:1.8em}
 <script>
 const questions=[
 {q:"Co oznacza skrót HTML?",o:["Hyper Text Markup Language","High Tech Modern Language","Home Tool Markup Language","Hyperlink Text Mode Language"],a:0},
-{q:"Który znacznik tworzy nagłówek najwyższego poziomu?",o:["<h6>","<head>","<h1>","<header>"],a:2},
-{q:"Który znacznik wstawia obraz?",o:["<image>","<img>","<pic>","<src>"],a:1},
+{q:"Który znacznik tworzy nagłówek najwyższego poziomu?",o:["&lt;h6&gt;","&lt;head&gt;","&lt;h1&gt;","&lt;header&gt;"],a:2},
+{q:"Który znacznik wstawia obraz?",o:["&lt;image&gt;","&lt;img&gt;","&lt;pic&gt;","&lt;src&gt;"],a:1},
 {q:"Atrybut src służy do:",o:["Ustawienia koloru","Wskazania źródła pliku","Dodania klasy","Zmiany czcionki"],a:1},
-{q:"Który znacznik tworzy link?",o:["<link>","<a>","<href>","<url>"],a:1},
-{q:"Znacznik <ul> tworzy:",o:["Listę numerowaną","Listę wypunktowaną","Tabelę","Nagłówek"],a:1},
-{q:"Który znacznik tworzy akapit?",o:["<p>","<para>","<text>","<a>"],a:0},
-{q:"Znacznik <br> służy do:",o:["Pogrubienia tekstu","Podziału na wiersze","Podkreślenia","Usunięcia tekstu"],a:1},
-{q:"Który znacznik tworzy tabelę?",o:["<tab>","<table>","<tbl>","<grid>"],a:1},
-{q:"Znacznik <strong> oznacza:",o:["Kursywę","Pogrubienie o znaczeniu semantycznym","Podkreślenie","Przekreślenie"],a:1},
-{q:"Który znacznik tworzy pole formularza?",o:["<form>","<input>","<field>","<box>"],a:1},
+{q:"Który znacznik tworzy link?",o:["&lt;link&gt;","&lt;a&gt;","&lt;href&gt;","&lt;url&gt;"],a:1},
+{q:"Znacznik &lt;ul&gt; tworzy:",o:["Listę numerowaną","Listę wypunktowaną","Tabelę","Nagłówek"],a:1},
+{q:"Który znacznik tworzy akapit?",o:["&lt;p&gt;","&lt;para&gt;","&lt;text&gt;","&lt;a&gt;"],a:0},
+{q:"Znacznik &lt;br&gt; służy do:",o:["Pogrubienia tekstu","Podziału na wiersze","Podkreślenia","Usunięcia tekstu"],a:1},
+{q:"Który znacznik tworzy tabelę?",o:["&lt;tab&gt;","&lt;table&gt;","&lt;tbl&gt;","&lt;grid&gt;"],a:1},
+{q:"Znacznik &lt;strong&gt; oznacza:",o:["Kursywę","Pogrubienie o znaczeniu semantycznym","Podkreślenie","Przekreślenie"],a:1},
+{q:"Który znacznik tworzy pole formularza?",o:["&lt;form&gt;","&lt;input&gt;","&lt;field&gt;","&lt;box&gt;"],a:1},
 {q:"DOCTYPE informuje przeglądarkę o:",o:["Autorze strony","Wersji HTML","Kolorze tła","Języku programu"],a:1},
-{q:"Który znacznik definiuje stopkę?",o:["<bottom>","<end>","<footer>","<foot>"],a:2},
-{q:"Znacznik <meta> znajduje się w:",o:["<body>","<head>","<footer>","<main>"],a:1},
+{q:"Który znacznik definiuje stopkę?",o:["&lt;bottom&gt;","&lt;end&gt;","&lt;footer&gt;","&lt;foot&gt;"],a:2},
+{q:"Znacznik &lt;meta&gt; znajduje się w:",o:["&lt;body&gt;","&lt;head&gt;","&lt;footer&gt;","&lt;main&gt;"],a:1},
 {q:"Który atrybut nadaje elementowi unikalny identyfikator?",o:["class","name","id","key"],a:2},
 {q:"Co oznacza CSS?",o:["Cascading Style Sheets","Computer Style System","Creative Style Syntax","Colorful Style Sheets"],a:0},
 {q:"Która właściwość zmienia kolor tekstu?",o:["text-color","font-color","color","text-style"],a:2},
@@ -73,30 +73,35 @@ let current=[],idx=0,score=0;
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
 function start(){
   current=shuffle(questions).slice(0,10);idx=0;score=0;
-  app.innerHTML=`<div class="start"><h1>🎓 Quiz HTML & CSS</h1><p class="subtitle">Sprawdź swoją wiedzę z podstaw stron internetowych</p><p>Zasady:<br>• 10 losowych pytań z bazy 25<br>• 4 odpowiedzi, jedna poprawna<br>• Skala ocen: 1–6<br>• Po zaznaczeniu przechodzisz dalej</p><button class="btn" onclick="showQuestion()">Rozpocznij quiz</button></div>`;
+  app.innerHTML='<div class="start"><h1>🎓 Quiz HTML &amp; CSS</h1><p class="subtitle">Sprawdź swoją wiedzę z podstaw stron internetowych</p><p>Zasady:<br>• 10 losowych pytań z bazy 25<br>• 4 odpowiedzi, jedna poprawna<br>• Skala ocen: 1–6<br>• Po zaznaczeniu przechodzisz dalej</p><br><button class="btn" onclick="showQuestion()">Rozpocznij quiz</button></div>';
 }
 function showQuestion(){
   const q=current[idx];const letters=['A','B','C','D'];
-  app.innerHTML=`<h1>🎓 Quiz HTML & CSS</h1><div class="progress"><div class="progress-bar" style="width:${(idx/10)*100}%"></div></div><div class="question-num">Pytanie ${idx+1} / 10</div><div class="question">${q.q}</div><div class="options">${q.o.map((o,i)=>`<div class="option" onclick="answer(${i})"><span class="letter">${letters[i]}</span><span class="answer-text">${o}</span></div>`).join('')}</div>`;
+  let html='<h1>🎓 Quiz HTML &amp; CSS</h1><div class="progress"><div class="progress-bar" style="width:'+(idx/10*100)+'%"></div></div><div class="question-num">Pytanie '+(idx+1)+' / 10</div><div class="question">'+q.q+'</div><div class="options">';
+  for(let i=0;i<q.o.length;i++){
+    html+='<div class="option" onclick="answer('+i+')"><span class="letter">'+letters[i]+'</span><span class="answer-text">'+q.o[i]+'</span></div>';
+  }
+  html+='</div>';
+  app.innerHTML=html;
 }
 function answer(i){
   const q=current[idx];const opts=document.querySelectorAll('.option');
-  opts.forEach(o=>o.classList.add('disabled'));
+  for(let k=0;k<opts.length;k++)opts[k].classList.add('locked');
   if(i===q.a){opts[i].classList.add('correct');score++}
   else{opts[i].classList.add('wrong');opts[q.a].classList.add('correct')}
-  setTimeout(()=>{idx++;if(idx<10)showQuestion();else showResult()},1100);
+  setTimeout(function(){idx++;if(idx<10)showQuestion();else showResult()},1200);
 }
 function grade(s){if(s<=4)return 1;if(s===5)return 2;if(s===6)return 3;if(s<=8)return 4;if(s===9)return 5;return 6}
 function showResult(){
   const g=grade(score);
   let msg='';
-  if(g===6)msg=' Rewelacja! Perfekcyjna wiedza!';
+  if(g===6)msg='🏆 Rewelacja! Perfekcyjna wiedza!';
   else if(g===5)msg='🌟 Świetna robota!';
   else if(g===4)msg='👍 Bardzo dobrze!';
   else if(g===3)msg='📚 Dobrze, ale jest pole do nauki.';
   else if(g===2)msg='📘 Warto powtórzyć materiał.';
   else msg='📖 Konieczna jest nauka od podstaw.';
-  app.innerHTML=`<div class="result"><h1>🎓 Wynik quizu</h1><div class="score">${score}/10</div><div class="grade">Ocena: <strong>${g}</strong></div><div class="grade-label">${msg}</div><div class="progress" style="margin-bottom:25px"><div class="progress-bar" style="width:${score*10}%"></div></div><button class="btn" onclick="start()">🔄 Zagraj ponownie</button></div>`;
+  app.innerHTML='<div class="result"><h1>🎓 Wynik quizu</h1><div class="score">'+score+'/10</div><div class="grade">Ocena: <strong>'+g+'</strong></div><div class="grade-label">'+msg+'</div><div class="progress" style="margin-bottom:25px"><div class="progress-bar" style="width:'+(score*10)+'%"></div></div><button class="btn" onclick="start()">🔄 Zagraj ponownie</button></div>';
 }
 start();
 </script>
